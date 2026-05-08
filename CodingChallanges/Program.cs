@@ -8,11 +8,17 @@ Console.WriteLine(result);*/
 // 3 - IsPalindrome
 /*Console.WriteLine(IsPalindrome(121));*/
 // 4 - RemoveElement
-int[] arr = [0, 1, 2, 2, 3, 0, 4, 2];
+/*int[] arr = [0, 1, 2, 2, 3, 0, 4, 2];
 int result = RemoveElement(arr, 2);
 for (int i = 0; i < arr.Length; i++)
     Console.Write($" {arr[i]} ");
-Console.WriteLine($" Result: {result}");
+Console.WriteLine($" Result: {result}");*/
+// 5 - RemoveDuplicates
+/*int[] arr = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+int result = RemoveDuplicates(arr);
+for (int i = 0; i < arr.Length; i++)
+    Console.Write($" {arr[i]} ");
+Console.WriteLine($" Result: {result}");*/
 
 int[] TwoSum(int[] nums, int target)
 {
@@ -110,4 +116,32 @@ int RemoveElement(int[] nums, int val)
 
     return count;
 }
+int RemoveDuplicates(int[] nums)
+{
+    if (nums.Length < 1 || nums.Length > 3 * Math.Pow(10, 4)) return 0;
 
+    int count = 1;
+    int left = nums[0];
+
+    for (int i = 1; i < nums.Length; i++)
+    {
+        if (nums[i] <= left && i + 1 <= nums.Length)
+        {
+            for (int j = i + 1; j < nums.Length; j++)
+            {
+                if (nums[j] > left)
+                {
+                    int temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                    left = nums[i];
+                    count++;
+                    break;
+                }
+            }
+        }
+        else
+            { count++; left = nums[i]; }
+    }
+    return count;
+}
